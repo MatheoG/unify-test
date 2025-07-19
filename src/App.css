@@ -10,7 +10,7 @@
 }
 @layer components {
     .btn {
-        padding: 0 1rem;
+        padding: 0.25rem 1rem;
         border-radius: 0.25rem;
         color: #fff;
         font-weight: 600;
