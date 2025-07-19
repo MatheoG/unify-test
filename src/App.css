@@ -1,1 +1,35 @@
-@import "tailwindcss";
+:root{
+    --primary: #8ed973;
+    --secondary: #0dc468;
+    --danger: #ff4d4f;
+    --warning: #ffec3d;
+    --info: #1890ff;
+    --success: #0dc468;
+}
+
+.btn {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.25rem;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+.btn:hover {
+    filter: brightness(0.9);
+}
+.btn-primary {
+    background-color: var(--primary);
+}
+.btn-secondary {
+    background-color: var(--secondary);
+}
+.btn-danger {
+    background-color: var(--danger);
+}
+.btn-warning {
+    background-color: var(--warning);
+}
