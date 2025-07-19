@@ -2,17 +2,18 @@ import { AgGridReact } from "ag-grid-react";
 import { useDeleteUser, useUsers } from "../hooks/useUsers"; 
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import type { ICellRendererParams } from "ag-grid-community";
-
+import { useNavigate } from "react-router-dom";
 function MainPage() {
   const pageSize = 20;
   const { data, isLoading, error } = useUsers();
   const deleteUser = useDeleteUser();
+  const navigate = useNavigate();
 
   const columnDefs = [
     { field: "id" },
     { field: "username",
       cellRenderer: (params: ICellRendererParams) => (
-        <a href={`/user/${params.data.id}`} className="text-blue-500 hover:underline">
+        <a onClick={() => navigate(`/user/${params.data.id}`)} className="text-blue-500 hover:underline">
           {params.value}
         </a>
       ),

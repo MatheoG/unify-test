@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useDeleteUser, useUser, useUserComments, useUserTodos } from "../hooks/useUsers";
 import { Card } from "../components/card";
 import type { Todo, Comment } from "../types/apiTypes";
+import { ChevronLeftIcon } from "@heroicons/react/24/solid";
+import { useNavigate } from "react-router-dom";
 
 export function UserPage() {
     const { id } = useParams();
@@ -9,13 +11,14 @@ export function UserPage() {
     const { data: todos, isLoading: isTodosLoading, error: todosError } = useUserTodos(Number(id));
     const { data: comments, isLoading: isCommentsLoading, error: commentsError } = useUserComments(Number(id));
     const deleteUser = useDeleteUser();
+    const navigate = useNavigate();
 
     const handleDelete = () => {
         if (id) {
             deleteUser.mutate(Number(id), {
                 onSuccess: () => {
                     // Redirect or show a success message after deletion
-                    window.location.href = "/";
+                    navigate("/");
                 },
             })
         }
@@ -24,15 +27,18 @@ export function UserPage() {
     return (
         <div className="p-4 space-y-4">
         <div className="flex justify-between items-center mb-4">
-         <h1 className="text-2xl font-bold">User Details</h1>
-         <button className="btn btn-danger" onClick={handleDelete}>Delete</button>
+        <div className="flex items-center space-x-2">
+            <ChevronLeftIcon className="h-6 w-6 text-gray-500 cursor-pointer" onClick={() => navigate("/")} />
+            <h1 className="text-2xl font-bold">User Details</h1>
+        </div>
+            <button className="btn btn-danger" onClick={handleDelete}>Delete</button>
         </div>
         {isLoading ? (
             <p>Loading...</p>
         ) : error ? (
             <p className="text-red-500">Error: {error.message}</p>
         ) : (
-            <Card title="User Information">
+            <Card title="User Information" isOpen={true}>
                 <div>
                     <p><strong>ID:</strong> {data.id}</p>
                     <p><strong>Name:</strong> {data.name}</p>
@@ -48,8 +54,8 @@ export function UserPage() {
         ) : todosError ? (
             <p className="text-red-500">Error: {todosError.message}</p>
         ) : (
-            <Card title="User Todos">
-                <ul className="list-disc pl-5 space-y-2">
+            <Card title="User Todos" isOpen={false}>
+                <ul className="list-disc pl-5 space-y-2 max-h-92 overflow-y-auto">
                     {todos.map((todo: Todo) => (
                         <li key={todo.id} className={todo.completed ? "line-through text-gray-500" : ""}>
                             {todo.title}
@@ -63,8 +69,8 @@ export function UserPage() {
         ) : commentsError ? (
             <p className="text-red-500">Error: {commentsError.message}</p>
         ) : (
-            <Card title="User Comments">
-                <ul className=" pl-5 space-y-2">
+            <Card title="User Comments" isOpen={false}>
+                <ul className=" pl-5 space-y-2 max-h-92 overflow-y-auto">
                     {comments.map((comment: Comment) => (
                         <li key={comment.id}>
                             <strong>{comment.name}</strong> (<a href={`mailto:${comment.email}`} className="text-blue-500 hover:underline">{comment.email}</a>): 
