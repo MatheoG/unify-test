@@ -1,69 +1,88 @@
-# React + TypeScript + Vite
+# Unify User Manage Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ce projet est une application de gestion d’utilisateurs construite avec React + Vite, TypeScript, TanStack Query et ag-Grid. Les données viennent de l’API gratuite [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧩 Fonctionnalités
 
-## Expanding the ESLint configuration
+- 🔍 Affichage des utilisateurs avec pagination
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🧑 Détail utilisateur avec :
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+  - Infos de base
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+  - Liste des todos
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+  - Liste des commentaires
+
+- 🗑 Suppression utilisateur (l'API ne supprime pas réellement)
+
+- 🧭 Navigation entre la liste et la page détail
+
+- 🧠 Gestion de l’état avec TanStack Query
+
+- 🎴 UI simple avec composants réutilisables (`<Card />`)
+
+## 📦 Tech Stack
+
+- [React](https://fr.react.dev/)
+- [Vite](https://vite.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [TanStack Query](https://tanstack.com)
+- [ag-Grid](https://www.ag-grid.com/)
+- [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
+- [React Router](https://reactrouter.com/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Heroicons](https://heroicons.com/)
+
+## 🚀 Démarrage
+
+1. Cloner le dépôt :
+
+```bash
+git clone https://github.com/MatheoG/unify-test
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Installer les dépendances :
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+cd unify-test
+npm install
+```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+3. Lancer l'application :
+
+```bash
+npm run dev
+```
+
+Accède ensuite à l'app sur <http://localhost:5173>.
+
+## 📊 Détails Techniques
+
+ L’API [JSONPlaceholder](https://jsonplaceholder.typicode.com/) ne retourne pas 1 million d’utilisateurs, mais dans un vrai projet, il serait necessaire d'utiliser **ag-Grid Enterprise** avec le mode **Server-Side Row Model** ou une autre lib pour les tableaux
+ Cela permettrait de gérer efficacement de grandes quantités de données avec des fonctionnalités avancées comme le tri, la pagination et le filtrage côté serveur.
+ ag-Grid Enterprise nécessite une licence.
+
+## 📂 Structure du Projet
+
+```plaintext
+unify-test/
+├── public/               # Fichiers statiques
+├── src/                  # Code source de l'application
+│   ├── components/       # Composants réutilisables
+│   ├── pages/
+│   │   ├── MainPage.tsx        # Page principale avec ag-Grid
+│   │   └── UserPage.tsx        # Détails utilisateur
+│   ├── hooks/          # Hooks personnalisés pour les requêtes API
+│   │   ├── useUsers.ts          # Récupération des utilisateurs
+│   ├── types/          # Types TypeScript
+│   ├── App.tsx         # Composant principal de l'application
+│   └── index.tsx       # Point d'entrée de l'application
+│   └── App.css        # Styles globaux
+├── vite.config.ts       # Configuration de Vite
+├── tsconfig.json        # Configuration TypeScript
+├── package.json         # Dépendances et scripts
+└── README.md            # Documentation du projet
 ```
