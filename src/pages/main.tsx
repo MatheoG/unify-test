@@ -7,7 +7,7 @@ function MainPage() {
   const pageSize = 5;
   const { data, isLoading, error } = useUsers();
   const deleteUser = useDeleteUser();
-  
+
   const columnDefs = [
     { field: "id" },
     { field: "username" },
@@ -25,6 +25,7 @@ function MainPage() {
 
   return (
     <div className="p-4 space-y-4">
+      <h1 className="text-2xl font-bold">User Management</h1>
       <div className="ag-theme-alpine">
         {isLoading ? (
           <p>⏳ Chargement...</p>
