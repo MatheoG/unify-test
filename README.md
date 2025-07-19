@@ -1,6 +1,6 @@
 # Unify User Manage Application
 
-Ce projet est une application de gestion d’utilisateurs construite avec React + Vite, TypeScript, TanStack Query et ag-Grid. Les données viennent de l’API gratuite [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
+Ce projet est une application de gestion d’utilisateurs construite avec [React](https://fr.react.dev/) + [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/), [TanStack Query](https://tanstack.com) et [ag-Grid](https://www.ag-grid.com/). Les données viennent de l’API gratuite [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
 
 ---
 
@@ -61,7 +61,7 @@ Accède ensuite à l'app sur <http://localhost:5173>.
 
 ## 📊 Détails Techniques
 
- L’API [JSONPlaceholder](https://jsonplaceholder.typicode.com/) ne retourne pas 1 million d’utilisateurs, mais dans un vrai projet, il serait necessaire d'utiliser **ag-Grid Enterprise** avec le mode **Server-Side Row Model** ou une autre lib pour les tableaux
+ L’API [JSONPlaceholder](https://jsonplaceholder.typicode.com/) ne retourne pas 1 million d’utilisateurs, mais dans un vrai projet, il serait necessaire d'utiliser **ag-Grid Enterprise** avec le mode [Server-Side Row Model](https://www.ag-grid.com/react-data-grid/server-side-model/) ou une autre librairie pour les tableaux.
  Cela permettrait de gérer efficacement de grandes quantités de données avec des fonctionnalités avancées comme le tri, la pagination et le filtrage côté serveur.
  ag-Grid Enterprise nécessite une licence.
 

@@ -17,7 +17,6 @@ export function UserPage() {
         if (id) {
             deleteUser.mutate(Number(id), {
                 onSuccess: () => {
-                    // Redirect or show a success message after deletion
                     navigate("/");
                 },
             })

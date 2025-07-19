@@ -10,16 +10,16 @@ function MainPage() {
   const navigate = useNavigate();
 
   const columnDefs = [
-    { field: "id" },
+    { field: "id", filter: "agNumberColumnFilter" },
     { field: "username",
       cellRenderer: (params: ICellRendererParams) => (
         <a onClick={() => navigate(`/user/${params.data.id}`)} className="text-blue-500 hover:underline">
           {params.value}
         </a>
-      ),
+      ), filter: "agTextColumnFilter"
     },
-    { field: "name" },
-    { field: "email" },
+    { field: "name", filter: "agTextColumnFilter" },
+    { field: "email", filter: "agTextColumnFilter" },
     {
         field: "Actions",
         cellRenderer: (params: ICellRendererParams) => (
@@ -40,6 +40,7 @@ function MainPage() {
           <p className="text-red-500">Erreur : {error.message}</p>
         ) : (
           <AgGridReact
+            
             rowData={data ?? []}
             columnDefs={columnDefs}
             pagination={true}
