@@ -1,6 +1,6 @@
 # Unify User Manage Application
 
-Ce projet est une application de gestion d’utilisateurs construite avec [React](https://fr.react.dev/) + [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/), [TanStack Query](https://tanstack.com) et [ag-Grid](https://www.ag-grid.com/). Les données viennent de l’API gratuite [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
+Ce projet est une application de gestion d’utilisateurs construite avec [React](https://fr.react.dev/) + [Vite](https://vite.dev/), [TypeScript](https://www.typescriptlang.org/), [TanStack Query](https://tanstack.com) et [ag-Grid](https://www.ag-grid.com/). Les données viennent de l’API [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
 
 ---
 
@@ -51,7 +51,7 @@ cd unify-test
 npm install
 ```
 
-3. Lancer l'application :
+3. Lancer l'application en mode développement :
 
 ```bash
 npm run dev

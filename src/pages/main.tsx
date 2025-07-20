@@ -8,40 +8,76 @@ function MainPage() {
   const { data, isLoading, error } = useUsers();
   const deleteUser = useDeleteUser();
   const navigate = useNavigate();
+  
+  // Create a skeleton row for loading state
+  const skeletonRows = Array.from({ length: 5}, (_, i) => ({
+    id: `loading-${i}`,
+    username: '',
+    name: '',
+    email: '',
+    __isLoading: true,
+  }));
 
+  const renderSkeletonCell = (width = 'w-2/3') => (
+    <div className={`bg-gray-200 rounded h-4 mt-3 ${width} animate-pulse`} />
+  );
+
+  // Define column definitions
   const columnDefs = [
-    { field: "id", filter: "agNumberColumnFilter" },
-    { field: "username",
-      cellRenderer: (params: ICellRendererParams) => (
-        <a onClick={() => navigate(`/user/${params.data.id}`)} className="text-blue-500 hover:underline">
-          {params.value}
-        </a>
-      ), filter: "agTextColumnFilter"
+    { field: "id" ,
+      cellRenderer: (params: ICellRendererParams) =>
+        params.data.__isLoading ? renderSkeletonCell("w-1/4") : params.value
     },
-    { field: "name", filter: "agTextColumnFilter" },
-    { field: "email", filter: "agTextColumnFilter" },
     {
-        field: "Actions",
-        cellRenderer: (params: ICellRendererParams) => (
-          <a onClick={() => deleteUser.mutate(params.data.id)} className="text-red-500 hover:underline ml-2 cursor-pointer">
+      field: "username",
+      cellRenderer: (params: ICellRendererParams) =>
+        params.data.__isLoading
+          ? renderSkeletonCell("w-2/3")
+          : (
+            <a
+              onClick={() => navigate(`/user/${params.data.id}`)}
+              className="text-blue-500 hover:underline"
+            >
+              {params.value}
+            </a>
+          ),
+    },
+    {
+      field: "name",
+      cellRenderer: (params: ICellRendererParams) =>
+        params.data.__isLoading ? renderSkeletonCell("w-1/2") : params.value,
+    },
+    {
+      field: "email",
+      cellRenderer: (params: ICellRendererParams) =>
+        params.data.__isLoading ? renderSkeletonCell("w-3/4") : params.value,
+    },
+    {
+      field: "Actions",
+      cellRenderer: (params: ICellRendererParams) =>
+        params.data.__isLoading ? null : (
+          <a
+            onClick={() => deleteUser.mutate(params.data.id)}
+            className="text-red-500 hover:underline ml-2 cursor-pointer"
+          >
             Delete
           </a>
         ),
     },
   ];
 
+
+  
+
   return (
     <div className="p-4 space-y-4">
       <h1 className="text-2xl font-bold">User Management</h1>
       <div className="ag-theme-alpine">
-        {isLoading ? (
-          <p>⏳ Chargement...</p>
-        ) : error ? (
+        {error ? (
           <p className="text-red-500">Erreur : {error.message}</p>
         ) : (
           <AgGridReact
-            
-            rowData={data ?? []}
+            rowData={isLoading ? skeletonRows : data ?? []}
             columnDefs={columnDefs}
             pagination={true}
             paginationPageSize={pageSize}
@@ -51,6 +87,7 @@ function MainPage() {
               params.api.sizeColumnsToFit();
             }}
           />
+
         )}
       </div>
     </div>

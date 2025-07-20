@@ -4,6 +4,7 @@ import { Card } from "../components/card";
 import type { Todo, Comment } from "../types/apiTypes";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
+import { SkeletonCard } from "../components/skeletoncard";
 
 export function UserPage() {
     const { id } = useParams();
@@ -33,7 +34,7 @@ export function UserPage() {
             <button className="btn btn-danger" onClick={handleDelete}>Delete</button>
         </div>
         {isLoading ? (
-            <p>Loading...</p>
+            <SkeletonCard lines={5} />
         ) : error ? (
             <p className="text-red-500">Error: {error.message}</p>
         ) : (
